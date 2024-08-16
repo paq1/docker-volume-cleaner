@@ -23,7 +23,7 @@ fn main() {
     sess.userauth_password(&user, &pwd).unwrap();
 
     let mut channel = sess.channel_session().unwrap();
-    channel.exec(&format!("echo {} | sudo -S docker volume ls", escape_pwd)).unwrap();
+    channel.exec(&format!("echo {} | sudo -S ls", escape_pwd)).unwrap();
     let mut s = String::new();
     channel.read_to_string(&mut s).unwrap();
     println!("message :");

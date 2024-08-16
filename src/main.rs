@@ -6,17 +6,13 @@ fn main() {
 
     dotenv::dotenv().ok();
 
-    println!("{:?}", std::env::vars());
-
-
+    // get env vars
     let user = std::env::var("USER_SSH").unwrap();
     let pwd = std::env::var("PWD_SSH").unwrap();
     let host = std::env::var("HOST_SSH").unwrap();
 
 
-    println!("Hello, world!");
     let tcp = TcpStream::connect(host).unwrap();
-
     let mut sess = Session::new().unwrap();
     sess.set_tcp_stream(tcp);
     sess.handshake().unwrap();

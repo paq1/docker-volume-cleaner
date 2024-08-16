@@ -1,3 +1,4 @@
+use std::fmt::format;
 use std::io::Read;
 use std::net::TcpStream;
 use ssh2::Session;
@@ -19,8 +20,10 @@ fn main() {
     sess.userauth_password(&user, &pwd).unwrap();
 
     let mut channel = sess.channel_session().unwrap();
-    channel.exec("docker volume ls").unwrap();
+    channel.exec("sudo docker volume ls").unwrap();
+    channel.exec(&format!("{pwd}")).unwrap();
     let mut s = String::new();
     channel.read_to_string(&mut s).unwrap();
+    println!("message :");
     println!("{s}");
 }

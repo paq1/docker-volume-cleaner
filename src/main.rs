@@ -86,13 +86,7 @@ fn create_delete_command(ids: &Vec<String>, folder_docker: &str, pwd: &str) -> S
         .collect::<Vec<_>>()
         .join(" ");
 
-
-
-    let cmd = format!("cd {folder_docker} && echo {pwd} | sudo -S ./docker volume rm {command_without_auth}");
-
-    println!("{cmd}");
-
-    cmd
+    format!("cd {folder_docker} && echo {pwd} | sudo -S ./docker volume rm {command_without_auth}")
 }
 
 impl CanEscape for String {}

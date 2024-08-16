@@ -82,21 +82,17 @@ fn main() {
 
 fn create_delete_command(ids: &Vec<String>, folder_docker: &str, pwd: &str) -> String {
     let command_without_auth = ids.iter()
-        .map(|current_id| create_one_delete_command(current_id.as_str()))
+        .map(|current_id| format!("{current_id}"))
         .collect::<Vec<_>>()
-        .join(" && ");
+        .join(" ");
 
 
 
-    let cmd = format!("cd {folder_docker} && echo {pwd} | sudo -S {command_without_auth}");
+    let cmd = format!("cd {folder_docker} && echo {pwd} | sudo -S ./docker volume rm {command_without_auth}");
 
     println!("{cmd}");
 
     cmd
-}
-
-fn create_one_delete_command(id_volume: &str) -> String {
-    format!("./docker volume rm {id_volume}")
 }
 
 impl CanEscape for String {}

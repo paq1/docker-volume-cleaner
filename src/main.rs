@@ -19,7 +19,7 @@ fn main() {
     sess.userauth_password(&user, &pwd).unwrap();
 
     let mut channel = sess.channel_session().unwrap();
-    channel.exec("sudo docker volume ls").unwrap();
+    channel.exec(&format!("echo {pwd} | sudo -S docker volume ls")).unwrap();
     // channel.exec(&format!("{pwd}")).unwrap();
     let mut s = String::new();
     channel.read_to_string(&mut s).unwrap();

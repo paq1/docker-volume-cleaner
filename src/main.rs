@@ -1,8 +1,3 @@
-// use std::io::Read;
-// use std::net::TcpStream;
-// use ssh::TerminalSize;
-// use ssh2::Session;
-
 use std::ops::Add;
 use ssh;
 

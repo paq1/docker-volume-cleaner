@@ -10,9 +10,6 @@ fn main() {
 
     dotenv::dotenv().ok();
 
-    println!("{:?}", std::env::vars());
-
-
     let user = std::env::var("USER_SSH").unwrap();
     let pwd = std::env::var("PWD_SSH").unwrap();
     let host = std::env::var("HOST_SSH").unwrap();
@@ -32,7 +29,7 @@ fn main() {
         .unwrap()
         .exec()
         .unwrap()
-        .send_command(&format!("echo {} | sudo -S docker container ls", escape_pwd))
+        .send_command(&format!("echo {} | sudo -S docker volume ls", escape_pwd))
         .unwrap()
         .to_vec();
 
